@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="app.wllfengshu.dao.TenantDao" >
+
+	<resultMap id="tenantList" type="app.wllfengshu.entity.Tenant">
+        <id column="id" property="id" />
+        <result column="applicant" property="applicant" />
+        <result column="domain" property="domain" />
+        <result column="company_name" property="company_name" />
+        <result column="company_type" property="company_type" />
+        <result column="territory" property="territory" />
+        <result column="status" property="status" />
+        <result column="url" property="url" />
+        <result column="ceo" property="ceo" />
+        <result column="people_num" property="people_num" />
+    </resultMap>
+
+	<select id="getTenants" resultMap="tenantList" >
+		SELECT 
+			*
+		FROM 
+			t_tenant
+	</select>
+
+	<insert id="addTenant" parameterType="app.wllfengshu.entity.Tenant">  
+        insert into 
+        	t_tenant
+        values
+        	(#{tenant.id},#{tenant.applicant},#{tenant.domain},#{tenant.company_name},#{tenant.company_type},
+        	#{tenant.territory},#{tenant.status},#{tenant.url},#{tenant.ceo},#{tenant.people_num})
+    </insert>
+
+	<select id="getTenant" parameterType="String" resultType="app.wllfengshu.entity.Tenant" >
+		SELECT 
+			*
+		FROM 
+			t_tenant t
+		WHERE 
+			t.id = #{id}
+	</select>
+
+	<update id="updateTenant" parameterType="app.wllfengshu.entity.Tenant" >  
+        update
+        	t_tenant
+        set
+        	applicant = #{tenant.applicant},company_name = #{tenant.company_name},company_type = #{tenant.company_type},territory = #{tenant.territory},
+        	status = #{tenant.status},url = #{tenant.url},ceo = #{tenant.ceo},people_num = #{tenant.people_num}
+        where
+        	id = #{tenant.id}
+    </update>
+    
+    <delete id="deleteTenant" parameterType="String">  
+        delete from
+        	t_tenant
+        where 
+        	id = #{id}  
+    </delete>
+</mapper>
