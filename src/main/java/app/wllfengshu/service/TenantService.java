@@ -4,7 +4,7 @@ import app.wllfengshu.exception.NotAcceptableException;
 
 public interface TenantService {
 	
-	public String getTenants(String sessionId,String user_id, int pageNo, int pageSize) throws NotAcceptableException;
+	public String getTenants(String sessionId,String user_id, String domain, String company_name, int pageNo, int pageSize) throws NotAcceptableException;
 
 	public String addTenant(String tenant,String sessionId,String user_id) throws NotAcceptableException;
 

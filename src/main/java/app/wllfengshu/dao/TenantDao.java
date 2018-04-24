@@ -9,7 +9,7 @@ import app.wllfengshu.entity.Tenant;
 
 @Repository
 public interface TenantDao {
-	public List<Tenant> getTenants(int pageNo, int pageSize);
+	public List<Tenant> getTenants(@Param("domain")String domain, @Param("company_name")String company_name, int pageNo, int pageSize);
 
 	public void addTenant(@Param("tenant")Tenant tenant);
 

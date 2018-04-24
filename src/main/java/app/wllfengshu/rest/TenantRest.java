@@ -38,16 +38,12 @@ public class TenantRest {
     @GET
     public Response getTenants(@HeaderParam(value="sessionId") String sessionId,
     		@HeaderParam(value="user_id") String user_id,
+    		@QueryParam("domain") String domain,@QueryParam("company_name") String company_name,
     		@QueryParam("pageNo") int pageNo,@QueryParam("pageSize") int pageSize,
     		@Context HttpServletRequest request,@Context HttpServletResponse response) {
-    	response.setHeader("Access-Control-Allow-Origin","*");
-        response.setHeader("Access-Control-Allow-Credentials","true");
-        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-        response.addHeader("Access-Control-Max-Age", "1800");//30 min
 		String responseStr = null;
 		try{
-			responseStr=tenantService.getTenants(sessionId,user_id,pageNo,pageSize);
+			responseStr=tenantService.getTenants(sessionId,user_id,domain,company_name,pageNo,pageSize);
 		}catch (NotAcceptableException e) {
 			System.out.println(e);
 			return Response.serverError().entity("{\"message\":\""+e.getMessage()+"\",\"timestamp\":\""+System.currentTimeMillis()+"\"}").status(406).build();
@@ -73,11 +69,8 @@ public class TenantRest {
     		@HeaderParam(value="sessionId") String sessionId,
     		@HeaderParam(value="user_id") String user_id,
     		@Context HttpServletRequest request,@Context HttpServletResponse response) {
-    	response.setHeader("Access-Control-Allow-Origin", "*");
-    	response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,content-type,Access-Control-Allow-Headers,Authorization,Access-Toke,lpy");
-		String responseStr = null;
+
+        String responseStr = null;
 		try{
 			responseStr=tenantService.addTenant(tenant,sessionId,user_id);
 		}catch (NotAcceptableException e) {
@@ -106,9 +99,6 @@ public class TenantRest {
     		@HeaderParam(value="sessionId") String sessionId,
     		@HeaderParam(value="user_id") String user_id,
     		@Context HttpServletRequest request,@Context HttpServletResponse response) {
-    	response.setHeader("Access-Control-Allow-Origin","*");
-        response.setHeader("Access-Control-Allow-Methods","GET,POST,PUT,OPTIONS");
-        response.setHeader("Access-Control-Allow-Credentials","true");
 		String responseStr = null;
 		try{
 			responseStr=tenantService.getTenant(tenant_id,sessionId,user_id);
@@ -138,9 +128,6 @@ public class TenantRest {
     		@HeaderParam(value="sessionId") String sessionId,
     		@HeaderParam(value="user_id") String user_id,
     		@Context HttpServletRequest request,@Context HttpServletResponse response) {
-    	response.setHeader("Access-Control-Allow-Origin","*");
-        response.setHeader("Access-Control-Allow-Methods","GET,POST,PUT,OPTIONS");
-        response.setHeader("Access-Control-Allow-Credentials","true");
 		String responseStr = null;
 		try{
 			responseStr=tenantService.updateTenant(tenant,sessionId,user_id);//前端的Tenant中必须包含Tenant_id
@@ -170,9 +157,6 @@ public class TenantRest {
     		@HeaderParam(value="sessionId") String sessionId,
     		@HeaderParam(value="user_id") String user_id,
     		@Context HttpServletRequest request,@Context HttpServletResponse response) {
-    	response.setHeader("Access-Control-Allow-Origin","*");
-        response.setHeader("Access-Control-Allow-Methods","GET,POST,PUT,OPTIONS");
-        response.setHeader("Access-Control-Allow-Credentials","true");
 		String responseStr = null;
 		try{
 			responseStr=tenantService.deleteTenant(tenant_id,sessionId,user_id);

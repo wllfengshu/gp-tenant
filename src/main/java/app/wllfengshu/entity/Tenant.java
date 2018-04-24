@@ -7,10 +7,10 @@ public class Tenant {
 	private String company_name;
 	private String company_type;
 	private String territory;
-	private String status;
+	private int status;
 	private String url;
 	private String ceo;
-	private String people_num;
+	private int people_num;
 	public String getId() {
 		return id;
 	}
@@ -47,10 +47,10 @@ public class Tenant {
 	public void setTerritory(String territory) {
 		this.territory = territory;
 	}
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	public String getUrl() {
@@ -65,10 +65,10 @@ public class Tenant {
 	public void setCeo(String ceo) {
 		this.ceo = ceo;
 	}
-	public String getPeople_num() {
+	public int getPeople_num() {
 		return people_num;
 	}
-	public void setPeople_num(String people_num) {
+	public void setPeople_num(int people_num) {
 		this.people_num = people_num;
 	}
 	

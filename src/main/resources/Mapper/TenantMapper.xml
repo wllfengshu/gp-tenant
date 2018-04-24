@@ -19,7 +19,11 @@
 		SELECT 
 			*
 		FROM 
-			t_tenant
+			t_tenant t
+		WHERE
+			t.status=1
+			<if test="!domain.equals('')">AND t.domain=#{domain}</if>
+			<if test="!company_name.equals('')">AND t.company_name=#{company_name}</if>
 	</select>
 
 	<insert id="addTenant" parameterType="app.wllfengshu.entity.Tenant">  

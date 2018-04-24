@@ -25,10 +25,10 @@ public class TenantServiceImpl implements TenantService {
 	private TenantDao tenantDao;
 	
 	@Override
-	public String getTenants(String sessionId,String user_id, int pageNo, int pageSize) throws NotAcceptableException {
+	public String getTenants(String sessionId,String user_id,String domain,String company_name, int pageNo, int pageSize) throws NotAcceptableException {
 		Map<String,Object> responseMap = new HashMap<String,Object>();
 		AuthUtil.instance.checkUserInfo(sessionId, user_id);
-		List<Tenant> tenants = tenantDao.getTenants(pageNo,pageSize);
+		List<Tenant> tenants = tenantDao.getTenants(domain,company_name,pageNo,pageSize);
 		responseMap.put("data", tenants);
 		responseMap.put("count", tenants.size());
 		responseMap.put("timestamp", String.valueOf(System.currentTimeMillis()));
@@ -46,6 +46,7 @@ public class TenantServiceImpl implements TenantService {
 			tenantJson=JSONObject.fromObject(tenant);
 			tenantTemp=(Tenant) JSONObject.toBean(tenantJson,Tenant.class);
 			tenantTemp.setId(tenant_id);
+			tenantTemp.setStatus(1);
 		}catch(Exception e){
 			throw new NotAcceptableException("数据格式错误");
 		}
