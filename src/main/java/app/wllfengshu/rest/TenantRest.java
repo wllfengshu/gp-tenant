@@ -36,10 +36,13 @@ public class TenantRest {
 	 * @return
 	 */
     @GET
-    public Response getTenants(@HeaderParam(value="sessionId") String sessionId,
+    public Response getTenants(
+    		@HeaderParam(value="sessionId") String sessionId,
     		@HeaderParam(value="user_id") String user_id,
-    		@QueryParam("domain") String domain,@QueryParam("company_name") String company_name,
-    		@QueryParam("pageNo") int pageNo,@QueryParam("pageSize") int pageSize,
+    		@QueryParam("domain") String domain,
+    		@QueryParam("company_name") String company_name,
+    		@QueryParam("pageNo") int pageNo,
+    		@QueryParam("pageSize") int pageSize,
     		@Context HttpServletRequest request,@Context HttpServletResponse response) {
 		String responseStr = null;
 		try{
