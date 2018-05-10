@@ -7,6 +7,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Response;
+import org.apache.http.client.fluent.Form;
 
 import app.wllfengshu.exception.NotAcceptableException;
 import net.sf.json.JSONObject;
@@ -63,5 +64,37 @@ public enum AuthUtil {
 			return null;
 		}
 	}
+	
+	/**
+	 * 添加user信息
+	 */
+	public void addUserInfo(String sessionId,JSONObject userJson){
+		Object addUser = addUser(sessionId, userJson.toString());
+		if (addUser!=null) {
+			System.out.println("创建租户管理员成功");
+		}
+	}
+	
+	/*
+	 * @title 添加user信息
+	 */
+	public Object addUser(String sessionId,String user){
+		String security_base_url="http://127.0.0.1:9001/";
+		String url = security_base_url+"security/user/";
+		Response res=null;
+		try {
+			res = Request.Post(url).setHeader("sessionId", sessionId).bodyForm(Form.form().add("user", user).build()).execute();
+			String responseStr = res.returnContent().asString();
+			if (!responseStr.equals("")) {
+				System.out.println("post请求成功");
+			}
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }
 	

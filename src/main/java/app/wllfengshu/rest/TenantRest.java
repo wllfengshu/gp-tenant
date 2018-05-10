@@ -71,6 +71,7 @@ public class TenantRest {
     public Response addTenant(String tenant,
     		@HeaderParam(value="sessionId") String sessionId,
     		@HeaderParam(value="user_id") String user_id,
+    		@QueryParam("token") String token,
     		@Context HttpServletRequest request,@Context HttpServletResponse response) {
 
         String responseStr = null;
